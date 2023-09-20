@@ -11,27 +11,54 @@ import onetoone_bi.dto.Person;
 public class Personmain {
 
 	public static void main(String[] args) {
-		Person person=new Person();
-		person.setName("ram");
-		person.setAddress("bangalore");
-		
-		Aadhar aadhar=new Aadhar();
-		aadhar.setAname("ram");
-		aadhar.setAddress("bangalore");
-		
-		person.setAadhar(aadhar);
-		aadhar.setPerson(person);
-		
 		EntityManagerFactory entityManagerFactory=Persistence.createEntityManagerFactory("nanditha");
 		EntityManager entityManager=entityManagerFactory.createEntityManager();
 		EntityTransaction entityTransaction=entityManager.getTransaction();
 		
+		//cascade for persist
+		
+//		Person person=new Person();
+//		person.setName("karan");
+//		person.setAddress("chennai");
+//		
+//		Aadhar aadhar=new Aadhar();
+//		aadhar.setAname("karan");
+//		aadhar.setAddress("chennai");
+//		
+//		person.setAadhar(aadhar);
+//		aadhar.setPerson(person);
+//		
 //		entityTransaction.begin();
-//		entityManager.persist(aadhar);
 //		entityManager.persist(person);
 //		entityTransaction.commit();
 		
-		Person person2=entityManager.find(Person.class, 1);
-		System.out.println(person2);
+		
+		//cascade for merge
+		
+//		Person person=entityManager.find(Person.class, 5);
+//		person.setId(5);
+//		person.setName("arun");
+//		person.setAddress("bangalore");
+//		
+//		Aadhar aadhar=new Aadhar();
+//		aadhar.setAid(4);
+//		aadhar.setAname("arun");
+//		aadhar.setAddress("bangalore");
+//		
+//		person.setAadhar(aadhar);
+//		aadhar.setPerson(person);
+//		
+//		entityTransaction.begin();
+//		entityManager.merge(person);
+//		entityTransaction.commit();
+		
+		
+		//cascade for remove
+		Person person=entityManager.find(Person.class, 5);
+		Aadhar aadhar=entityManager.find(Aadhar.class, 4);
+		
+		entityTransaction.begin();
+		entityManager.remove(person);
+		entityTransaction.commit();
 	}
 }
